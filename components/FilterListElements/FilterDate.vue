@@ -41,20 +41,20 @@ export default {
   },
   watch:{
      'payDataStart'(val){
-         let n={};
-      n.type='date';
-      n.start=val;
-      n.end=this.payDataEnd;
-      n.serverName=this.filter.serverName;
-      this.$emit('filterSort',n)
+         let filterSortData={};
+      filterSortData.type='date';
+      filterSortData.start=val;
+      filterSortData.end=this.payDataEnd;
+      filterSortData.serverName=this.filter.serverName;
+      this.$emit('filterSort',filterSortData)
       },
       'payDataEnd'(val){
-         let n={};
-      n.type='date';
-      n.end=val;
-      n.start=this.payDataStart;
-      n.serverName=this.filter.serverName;
-      this.$emit('filterSort',n)
+         let filterSortData={};
+      filterSortData.type='date';
+      filterSortData.end=val;
+      filterSortData.start=this.payDataStart;
+      filterSortData.serverName=this.filter.serverName;
+      this.$emit('filterSort',filterSortData)
     }
   },
 }

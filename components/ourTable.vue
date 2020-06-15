@@ -27,12 +27,12 @@ export default {
         ])
   },
   methods:{
-    filterSort(n){
-      if(n.type=='drop'){
-        this.$store.commit('TableData/dataFilterDrop',n);
+    filterSort(filterSortData){
+      if(filterSortData.type=='drop'){
+        this.$store.commit('TableData/dataFilterDrop',filterSortData);
       }
-      if(n.type=='date'){
-        this.$store.commit('TableData/dataFilterDate',n);
+      if(filterSortData.type=='date'){
+        this.$store.commit('TableData/dataFilterDate',filterSortData);
       }
     }
   },

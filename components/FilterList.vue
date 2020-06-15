@@ -33,8 +33,8 @@ export default {
       filterList:Array,
   },
   methods:{
-      filterSort(n){
-         this.$emit('filterSort',n); 
+      filterSort(filterSortData){
+         this.$emit('filterSort',filterSortData); 
       }
   },
 }

@@ -31,11 +31,11 @@ export default {
   },
   watch:{
       'currentChoose'(val){
-      let n={};
-      n.type='drop';
-      n.serverName=this.filter.serverName;
-      n.name=val;
-      this.$emit('filterSort',n)
+      let filterSortData={};
+      filterSortData.type='drop';
+      filterSortData.serverName=this.filter.serverName;
+      filterSortData.name=val;
+      this.$emit('filterSort',filterSortData)
       }
   },
   mounted(){
