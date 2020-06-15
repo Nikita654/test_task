@@ -1,91 +1,96 @@
 <template>
-<div class="table">
- <filters @filterData="filterData"  class="table_filters" :dataReqs="dataReqs"  :filters="dataFilters" />
- <tableReqs class="table_data" :dataColumns="dataColumns" :dataReqs="dataReqs" />
- </div>
+  <div class="table">
+    <FilterList
+      :dataReqsList="dataReqsList"
+      :filterList="filterList"
+      class="table_filters"
+      @filterSort="filterSort"
+    />
+    <TableReqsList class="table_data" :dataColumns="dataColumns" :dataReqsList="dataReqsList" />
+  </div>
 </template>
 
 <script>
-import filters from  '@/components/filters'
-import tableReqs from  '@/components/tables/tableReqs'
+//mapGetters не нужен, так как мы используем данные сразу без обработки
+import { mapState } from 'vuex';
+import FilterList from  '@/components/FilterList'
+import TableReqsList from  '@/components/TableReqs/TableReqsList'
 export default {
   components: {
-    filters,
-    tableReqs
+    FilterList,
+    TableReqsList
   },
-  name:'ourTable',
-  data() {
-    return {
-   };
-  },
+  name:'OurTable',
   computed:{
-  
-   
-    dataFilters() {
-    return this.$store.getters['TableData/getdataFilters']
-    },
-    dataReqs() {
-    return this.$store.getters['TableData/getdataReqs']
-    },
-    dataColumns() {
-    return this.$store.getters['TableData/getdataColumns']
-    },
+   ...mapState('TableData',[
+            'filterList','dataColumns','dataReqsList'
+        ])
   },
   methods:{
-    filterData(n){
-      if(n.type=="drop"){
+    filterSort(n){
+      if(n.type=='drop'){
         this.$store.commit('TableData/dataFilterDrop',n);
       }
-      if(n.type=="date"){
+      if(n.type=='date'){
         this.$store.commit('TableData/dataFilterDate',n);
       }
     }
   },
-  watch:{
-    
-  },
-  mounted(){
-    
-  }
 }
 </script>
 
-<style lang="css" local>
-body{
-  margin:0;
+<style lang='scss' local>
+body {
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
-main{
-  background-color:#eee ;
+main {
+  background-color: #eee;
   color: #000;
 }
-.table{
+.fade {
+  &-enter-active {
+    transition: all 0.7s ease;
+  }
+  &-leave-active {
+    transition: all 0.7s ease;
+  }
+  &-leave-to {
+    opacity: 0;
+  }
+  &-enter {
+    opacity: 0;
+  }
+}
+.table {
   width: 1440px;
   max-width: 1440px;
-  margin-left:auto;
+  margin-left: auto;
   margin-right: auto;
-  
+
   max-height: 80vh;
   padding: 10vh 0;
-}
-.table_filters{
-  margin-bottom: 25px
-}
-.table_data{
-  background-color:#FFF ;
-  width: 100%;
-}
-@media(max-width: 1440px){
-  .table{
-  width: calc(100% - 20px);
-  overflow-x: hidden;
+
+  &_filters {
+    margin-bottom: 25px;
   }
-  .table_data{
-  overflow-x: scroll;
+  &_data {
+    background-color: #fff;
+    width: 100%;
+  }
 }
-.table_dashboard{
-  width: 1440px;
-  max-width: 1440px;
-}
+@media (max-width: 1440px) {
+  .table {
+    width: calc(100% - 20px);
+    overflow-x: hidden;
+
+    &_data {
+      overflow-x: scroll;
+    }
+    &_dashboard {
+      width: 1440px;
+      max-width: 1440px;
+    }
+  }
 }
 </style>

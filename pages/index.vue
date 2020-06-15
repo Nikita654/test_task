@@ -1,18 +1,14 @@
 <template>
-  <main>
-    <ourTable />
-  </main>
+    <main>
+        <OurTable />
+    </main>
 </template>
 
 <script>
-import ourTable from '@/components/ourTable'
+import OurTable from '@/components/OurTable'
 export default {
   components: {
-    ourTable
+    OurTable
   }
 }
 </script>
-
-<style>
-
-</style>
